@@ -18,7 +18,28 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+
 Route::group(['middleware'=>'auth'],function(){
-    Route::resource('admin/settings', 'Admin\\SettingController');
+    Route::group(['middleware'=>'admin','prefix'=>'admin'],function(){
+        Route::get('',function(){
+            return "test";
+        });
+        Route::resource('admin/settings', 'Admin\\SettingController');
+    });
+    Route::group(['middleware'=>'embassy','prefix'=>'embassy'],function(){
+        Route::get('',function(){
+            return "test";
+        });
+
+    });
+    Route::group(['middleware'=>'ministry','prefix'=>'ministry'],function(){
+        Route::get('',function(){
+            return "ministry";
+            return "ministry";
+            return "ministry";
+        });
+
+    });
 });
 
